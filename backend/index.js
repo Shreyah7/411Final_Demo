@@ -7,8 +7,8 @@ const cors = require("cors");
 var db = mysql.createConnection({
   host:'localhost',
   user: 'root',
-  password:' ',
-  database:' ',
+  password:'Shivini123#$',
+  database:'storage_friends',
 })
 
 app.use(cors());
@@ -34,15 +34,35 @@ app.get("/api/getUser/:UserId", (require, response) => {
     })
 });
 
-// app.post("/api/insertBooking", (require, response) => {
-app.post("/api/login", (require, response) => {
-    //const NewListingId = require.body.NewListingId;
-    const LoginUserEmail = require.body.LoginUserEmail;
-    const LoginPassword = require.body.LoginPassword;
-    console.log(LoginUserEmail)
+// // app.post("/api/insertBooking", (require, response) => {
+// app.post("/api/login", (require, response) => {
+//     //const NewListingId = require.body.NewListingId;
+//     const LoginUserEmail = require.body.LoginUserEmail;
+//     const LoginPassword = require.body.LoginPassword;
+//     console.log(LoginUserEmail)
 
-    const sqlSelect = "SELECT * FROM Users WHERE UserEmail = ? AND Password = ?";
-    db.query(sqlSelect, LoginUserEmail, LoginPassword, (err, result) => {
+//     const sqlSelect = "SELECT * FROM Users WHERE UserEmail = ? AND Password = ?";
+//     db.query(sqlSelect, LoginUserEmail, LoginPassword, (err, result) => {
+//         response.send(result);
+//         console.log(result);
+//     })
+// });
+
+//login
+app.post("/api/get/user", (require, response) => {
+
+    console.log('inside login')
+    console.log(require.body)
+
+    const Email = require.body.loginEmail;
+    const Password = require.body.Password;
+    console.log("email: " + Email);
+    console.log("password: " + Password);
+    
+    
+
+    const sqlSelect = "SELECT * FROM Users WHERE Email = ? and Password = ?";
+    db.query(sqlSelect, [Email, Password], (err, result) => {
         response.send(result);
         console.log(result);
     })
